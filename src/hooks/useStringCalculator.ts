@@ -19,6 +19,12 @@ export function useStringCalculator() {
 
     const numberArray = numbersPart.split(delimiter);
 
+    const negatives = numberArray.filter((n) => parseInt(n, 10) < 0);
+
+    if (negatives.length > 0) {
+      throw new Error(`negatives not allowed: ${negatives.join(",")}`);
+    }
+
     const getSum =
       numberArray.length > 1
         ? numberArray.reduce(

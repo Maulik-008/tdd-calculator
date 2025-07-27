@@ -78,4 +78,16 @@ describe("useStringCalculator", () => {
 
     expect(result.current.result).toBe(3);
   });
+
+  it("should throw an error for negative numbers", () => {
+    const { result } = renderHook(() => useStringCalculator());
+
+    act(() => {
+      result.current.setInput("1,-2,3");
+    });
+
+    expect(() => result.current.calculate()).toThrow(
+      "negatives not allowed: -2"
+    );
+  });
 });
