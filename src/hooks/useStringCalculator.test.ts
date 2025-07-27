@@ -26,4 +26,17 @@ describe("useStringCalculator", () => {
 
     expect(result.current.result).toBe(1);
   });
+  it("should return the sum of two comma-separated numbers", () => {
+    const { result } = renderHook(() => useStringCalculator());
+
+    act(() => {
+      result.current.setInput("1,2");
+    });
+
+    act(() => {
+      result.current.calculate();
+    });
+
+    expect(result.current.result).toBe(3);
+  });
 });

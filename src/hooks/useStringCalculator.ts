@@ -8,6 +8,18 @@ export function useStringCalculator() {
   const add = (numbers: string): number => {
     if (!numbers) return 0;
 
+    if (numbers.includes(",")) {
+      const numberArray = numbers.split(",");
+
+      const getSum =
+        numberArray.length > 1
+          ? numberArray.reduce(
+              (sum, current) => sum + (current ? parseInt(current, 10) : 0),
+              0
+            )
+          : 0;
+      return getSum;
+    }
     return Number(numbers);
   };
 
