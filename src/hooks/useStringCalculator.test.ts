@@ -65,4 +65,17 @@ describe("useStringCalculator", () => {
 
     expect(result.current.result).toBe(6);
   });
+  it("should support a custom delimiter", () => {
+    const { result } = renderHook(() => useStringCalculator());
+
+    act(() => {
+      result.current.setInput("//;\n1;2");
+    });
+
+    act(() => {
+      result.current.calculate();
+    });
+
+    expect(result.current.result).toBe(3);
+  });
 });

@@ -8,19 +8,25 @@ export function useStringCalculator() {
   const add = (numbers: string): number => {
     if (!numbers) return 0;
 
-    if (numbers.includes(",") || numbers.includes("\n")) {
-      const numberArray = numbers.split(/[\n,]/);
+    let delimiter: string | RegExp = /,|\n/;
+    let numbersPart = numbers;
 
-      const getSum =
-        numberArray.length > 1
-          ? numberArray.reduce(
-              (sum, current) => sum + (current ? parseInt(current, 10) : 0),
-              0
-            )
-          : 0;
-      return getSum;
+    if (numbers.startsWith("//")) {
+      const delimiterEndIndex = numbers.indexOf("\n");
+      delimiter = numbers.substring(2, delimiterEndIndex);
+      numbersPart = numbers.substring(delimiterEndIndex + 1);
     }
-    return Number(numbers);
+
+    const numberArray = numbersPart.split(delimiter);
+
+    const getSum =
+      numberArray.length > 1
+        ? numberArray.reduce(
+            (sum, current) => sum + (current ? parseInt(current, 10) : 0),
+            0
+          )
+        : Number(numbers);
+    return getSum;
   };
 
   const calculate = () => {
