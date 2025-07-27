@@ -39,4 +39,17 @@ describe("useStringCalculator", () => {
 
     expect(result.current.result).toBe(3);
   });
+  it("should return the sum of multiple comma-separated numbers", () => {
+    const { result } = renderHook(() => useStringCalculator());
+
+    act(() => {
+      result.current.setInput("1,2,3,4,5");
+    });
+
+    act(() => {
+      result.current.calculate();
+    });
+
+    expect(result.current.result).toBe(15);
+  });
 });
