@@ -8,8 +8,8 @@ export function useStringCalculator() {
   const add = (numbers: string): number => {
     if (!numbers) return 0;
 
-    if (numbers.includes(",")) {
-      const numberArray = numbers.split(",");
+    if (numbers.includes(",") || numbers.includes("\n")) {
+      const numberArray = numbers.split(/[\n,]/);
 
       const getSum =
         numberArray.length > 1

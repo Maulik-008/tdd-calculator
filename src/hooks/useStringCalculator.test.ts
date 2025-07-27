@@ -52,4 +52,17 @@ describe("useStringCalculator", () => {
 
     expect(result.current.result).toBe(15);
   });
+  it("should handle new lines between numbers", () => {
+    const { result } = renderHook(() => useStringCalculator());
+
+    act(() => {
+      result.current.setInput("1\n2,3");
+    });
+
+    act(() => {
+      result.current.calculate();
+    });
+
+    expect(result.current.result).toBe(6);
+  });
 });
