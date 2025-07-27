@@ -28,10 +28,17 @@ export function useStringCalculator() {
     const getSum =
       numberArray.length > 1
         ? numberArray.reduce(
-            (sum, current) => sum + (current ? parseInt(current, 10) : 0),
+            (sum, current) =>
+              sum +
+              (current && !Number.isNaN(Number(current))
+                ? parseInt(current, 10)
+                : 0),
             0
           )
-        : Number(numbers);
+        : !Number.isNaN(Number(numberArray))
+        ? Number(numberArray)
+        : 0;
+
     return getSum;
   };
 
