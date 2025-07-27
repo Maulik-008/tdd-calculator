@@ -46,11 +46,18 @@ export function useStringCalculator() {
     }
   };
 
+  const reset = () => {
+    setInput("");
+    setResult(null);
+    setError(null);
+  };
+
   return {
     input,
     setInput,
     result,
     error,
     calculate,
+    reset,
   };
 }
