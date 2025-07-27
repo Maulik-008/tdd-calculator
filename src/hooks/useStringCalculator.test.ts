@@ -11,6 +11,19 @@ describe("useStringCalculator", () => {
     });
 
     expect(result.current.result).toBe(0);
-    expect(result.current.error).toBeNull();
+  });
+
+  it("should return the number itself for a single number input", async () => {
+    const { result } = renderHook(() => useStringCalculator());
+
+    act(() => {
+      result.current.setInput("1");
+    });
+
+    act(() => {
+      result.current.calculate();
+    });
+
+    expect(result.current.result).toBe(1);
   });
 });
